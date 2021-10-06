@@ -6,7 +6,7 @@ class Integer{
 		Integer(int);
 		int get();
 		void set(int);
-		void fib(int)
+		int fib();
 	private:
 		int val;
 	};
@@ -22,22 +22,21 @@ int Integer::get(){
 void Integer::set(int n){
 	val = n;
 	}
-	
-void Integer::fib(int n){
-    if (n <= 1){
-    return 1;
-    }
-    else{
-    return fib(n-1)+fib(n-2);
-    }
-}
 
+int Integer::fib(){
+if (val <= 1)
+{
+return 1;
+}
+else{
+return Integer(val - 1).fib() + Integer(val - 2).fib();}
+}
 
 extern "C"{
 	Integer* Integer_new(int n) {return new Integer(n);}
 	int Integer_get(Integer* integer) {return integer->get();}
 	void Integer_set(Integer* integer, int n) {integer->set(n);}
-	void Integer_fib(Integer*, integer, int n) {integer->fib(n);}
+	int Integer_fib(Integer* integer, int n) {return integer->fib();}
 	void Integer_delete(Integer* integer){
 		if (integer){
 			delete integer;
